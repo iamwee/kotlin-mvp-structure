@@ -46,11 +46,8 @@ class MainFragment : BaseFragment<IMainPresenter>(), IMainView {
     }
 
     companion object {
-        fun newInstance(): MainFragment {
-            val args = Bundle()
-            val fragment = MainFragment()
-            fragment.arguments = args
-            return fragment
+        fun newInstance(): MainFragment = MainFragment().apply {
+            arguments = Bundle()
         }
     }
 }

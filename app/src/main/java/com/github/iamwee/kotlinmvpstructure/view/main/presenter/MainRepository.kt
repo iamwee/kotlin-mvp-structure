@@ -13,7 +13,7 @@ import retrofit2.Call
 class MainRepository : BaseRepository() {
 
     fun getRepositories(callback: ServiceCallback<List<RepoResponse>>) {
-        call(HttpProvider.instance.githubService().getRepositories(), false, object : ServiceCallback<List<RepoResponse>> {
+        call(HttpProvider.instance.githubService().getRepositories(), object : ServiceCallback<List<RepoResponse>> {
             override fun onResponse(call: Call<List<RepoResponse>>?, body: List<RepoResponse>?) {
                 callback.onResponse(call, body)
             }

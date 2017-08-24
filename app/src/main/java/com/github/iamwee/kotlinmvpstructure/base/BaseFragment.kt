@@ -1,5 +1,6 @@
 package com.github.iamwee.kotlinmvpstructure.base
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.View
@@ -26,6 +27,11 @@ abstract class BaseFragment<PRESENTER : IBasePresenter> : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupView()
+    }
+
+    override fun startActivity(intent: Intent?) {
+        super.startActivity(intent)
+        activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
     }
 
     protected abstract fun setupView()

@@ -7,8 +7,7 @@ import retrofit2.Response
 
 open class BaseRepository {
 
-    protected open fun <ResponseBody> call(service: Call<ResponseBody>,
-                                           showDialog: Boolean = false,
+    protected fun <ResponseBody> call(service: Call<ResponseBody>,
                                            callback: ServiceCallback<ResponseBody>) {
 
         service.enqueue(object : Callback<ResponseBody> {

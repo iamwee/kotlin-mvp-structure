@@ -36,7 +36,7 @@ class MainAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemCount(): Int = items.size
 
-    private class ItemViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
-        val tvTitle: TextView = itemView!!.findViewById(R.id.tvTitle)
+    private class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val tvTitle: TextView = itemView.findViewById(R.id.tvTitle)
     }
 }
