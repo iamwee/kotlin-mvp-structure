@@ -7,9 +7,7 @@ import retrofit2.Response
 
 open class BaseRepository {
 
-    protected fun <ResponseBody> call(service: Call<ResponseBody>,
-                                           callback: ServiceCallback<ResponseBody>) {
-
+    protected fun <ResponseBody> call(service: Call<ResponseBody>, callback: ServiceCallback<ResponseBody>) {
         service.enqueue(object : Callback<ResponseBody> {
             override fun onResponse(call: Call<ResponseBody>?, response: Response<ResponseBody>?) {
                 if (response!!.isSuccessful) {

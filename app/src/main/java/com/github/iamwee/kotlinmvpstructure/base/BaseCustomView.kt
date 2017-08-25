@@ -64,7 +64,7 @@ abstract class BaseCustomView : FrameLayout {
 
     override fun onRestoreInstanceState(state: Parcelable) {
         val ss = state as BundleSavedState
-        super.onRestoreInstanceState(ss.getSuperState())
+        super.onRestoreInstanceState(ss.superState)
 
         val childrenStates = ss.bundle.getBundle(KEY_CHILDREN_STATES)
         for (i in 0 until childCount - 1) {
@@ -85,6 +85,8 @@ abstract class BaseCustomView : FrameLayout {
     override fun dispatchRestoreInstanceState(container: SparseArray<Parcelable>) {
         dispatchThawSelfOnly(container)
     }
+
+    
 
 
 }

@@ -14,7 +14,7 @@ import com.github.iamwee.kotlinmvpstructure.http.dao.RepoResponse
 
 class MainAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    lateinit var listener: ((Int) -> Unit)
+    var listener: ((Int) -> Unit)? = null
 
     var items: List<RepoResponse> = ArrayList()
 
@@ -29,7 +29,7 @@ class MainAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 |${items[position].url}
                 """.trimMargin()
             holder.itemView.setOnClickListener {
-                listener.invoke(position)
+                listener?.invoke(position)
             }
         }
     }
