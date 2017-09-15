@@ -13,11 +13,11 @@ class MainPresenter(repository: MainRepository, view: IMainView) : BasePresenter
 
     override fun getRepositoryFromGithub() {
         repository.getRepositories(object : ServiceCallback<List<RepoResponse>> {
-            override fun onResponse(call: Call<List<RepoResponse>>?, body: List<RepoResponse>?) {
-                view.onRepoResult(body!!)
+            override fun onResponse(call: Call<List<RepoResponse>>, body: List<RepoResponse>) {
+                view.onRepoResult(body)
             }
 
-            override fun onFailure(call: Call<List<RepoResponse>>?, t: Throwable?) {
+            override fun onFailure(call: Call<List<RepoResponse>>, t: Throwable) {
 
             }
 

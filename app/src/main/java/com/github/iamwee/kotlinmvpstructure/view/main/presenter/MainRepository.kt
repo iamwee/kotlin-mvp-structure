@@ -14,11 +14,11 @@ class MainRepository : BaseRepository() {
 
     fun getRepositories(callback: ServiceCallback<List<RepoResponse>>) {
         call(repositoriesCall(), object : ServiceCallback<List<RepoResponse>> {
-            override fun onResponse(call: Call<List<RepoResponse>>?, body: List<RepoResponse>?) {
+            override fun onResponse(call: Call<List<RepoResponse>>, body: List<RepoResponse>) {
                 callback.onResponse(call, body)
             }
 
-            override fun onFailure(call: Call<List<RepoResponse>>?, t: Throwable?) {
+            override fun onFailure(call: Call<List<RepoResponse>>, t: Throwable) {
                 callback.onFailure(call, t)
             }
         })

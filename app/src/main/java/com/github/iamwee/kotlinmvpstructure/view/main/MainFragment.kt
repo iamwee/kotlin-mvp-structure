@@ -3,9 +3,6 @@ package com.github.iamwee.kotlinmvpstructure.view.main
 import android.os.Bundle
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import com.github.iamwee.kotlinmvpstructure.R
 import com.github.iamwee.kotlinmvpstructure.base.BaseFragment
@@ -21,8 +18,7 @@ class MainFragment : BaseFragment<IMainPresenter>(), IMainView {
 
     private lateinit var mainAdapter: MainAdapter
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?):
-            View? = inflater!!.inflate(R.layout.fragment_main, container, false)
+    override fun getLayoutId(): Int = R.layout.fragment_main
 
     override fun onCreatePresenter(): IMainPresenter = MainPresenter(MainRepository(), this@MainFragment)
 
@@ -41,8 +37,7 @@ class MainFragment : BaseFragment<IMainPresenter>(), IMainView {
     }
 
     override fun onRepoResult(result: List<RepoResponse>) {
-        mainAdapter.items = result
-        mainAdapter.notifyDataSetChanged()
+        mainAdapter.map(result)
     }
 
     companion object {

@@ -3,7 +3,9 @@ package com.github.iamwee.kotlinmvpstructure.base
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import com.github.iamwee.kotlinmvpstructure.ServiceCallback
 import com.github.iamwee.kotlinmvpstructure.base.presenter.BasePresenter
 import com.github.iamwee.kotlinmvpstructure.base.presenter.IBasePresenter
@@ -24,6 +26,9 @@ abstract class BaseFragment<PRESENTER : IBasePresenter> : Fragment() {
         presenter = onCreatePresenter()
     }
 
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?)
+            : View? = inflater?.inflate(getLayoutId(), container, false)
+
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupView()
@@ -34,6 +39,7 @@ abstract class BaseFragment<PRESENTER : IBasePresenter> : Fragment() {
         activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
     }
 
+    protected abstract fun getLayoutId() : Int
     protected abstract fun setupView()
     protected abstract fun onCreatePresenter(): PRESENTER
 }
