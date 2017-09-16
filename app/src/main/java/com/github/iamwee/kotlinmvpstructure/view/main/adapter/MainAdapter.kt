@@ -23,7 +23,7 @@ class MainAdapter : BaseAdapter() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         when (viewType) {
-            TYPE_REPO -> return ItemViewHolder(parent, R.layout.item_main)
+            TYPE_REPO -> return ItemViewHolder(parent)
         }
         throw ViewTypeNotFoundException(viewType)
     }
@@ -51,7 +51,7 @@ class MainAdapter : BaseAdapter() {
         notifyDataSetChanged()
     }
 
-    private class ItemViewHolder(parent: ViewGroup, layoutId: Int) : BaseViewHolder(parent, layoutId) {
+    private class ItemViewHolder(parent: ViewGroup) : BaseViewHolder(parent, R.layout.item_main) {
         val tvTitle: TextView = itemView.findViewById(R.id.tvTitle)
     }
 }
