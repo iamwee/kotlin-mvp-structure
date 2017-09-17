@@ -20,7 +20,7 @@ class MainFragment : BaseFragment<IMainPresenter>(), IMainView {
 
     override fun getLayoutId(): Int = R.layout.fragment_main
 
-    override fun onCreatePresenter(): IMainPresenter = MainPresenter(MainRepository(), this@MainFragment)
+    override fun onCreatePresenter(): IMainPresenter = MainPresenter(MainRepository(), this)
 
     override fun setupView() {
         mainAdapter = MainAdapter().apply {

@@ -11,3 +11,7 @@ data class RepoResponse(@SerializedName("id") var id: Int,
                         @SerializedName("full_name") var fullName: String,
                         @SerializedName("owner") var owner: Owner,
                         @SerializedName("url") var url: String)
+
+data class Owner(@SerializedName("login") var login: String,
+                 @SerializedName("id") var id: Int,
+                 @SerializedName("avatar_url") var avatarUrl: String)
