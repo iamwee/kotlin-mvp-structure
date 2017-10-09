@@ -85,8 +85,4 @@ abstract class BaseCustomView : FrameLayout {
     override fun dispatchRestoreInstanceState(container: SparseArray<Parcelable>) {
         dispatchThawSelfOnly(container)
     }
-
-    
-
-
 }
