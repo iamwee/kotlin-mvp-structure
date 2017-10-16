@@ -32,7 +32,6 @@ class MainFragment : BaseFragment<IMainPresenter>(), IMainView {
             addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
             adapter = mainAdapter
         }
-
         presenter.getRepositoryFromGithub()
     }
 
