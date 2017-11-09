@@ -9,29 +9,28 @@ import com.github.iamwee.kotlinmvpstructure.base.presenter.MvpFragment
 import com.github.iamwee.kotlinmvpstructure.extensions.showToast
 import com.github.iamwee.kotlinmvpstructure.http.entity.RepositoryEntity
 import com.github.iamwee.kotlinmvpstructure.view.main.adapter.MainAdapter
-import com.github.iamwee.kotlinmvpstructure.view.main.presenter.IMainPresenter
-import com.github.iamwee.kotlinmvpstructure.view.main.presenter.IMainView
-import com.github.iamwee.kotlinmvpstructure.view.main.presenter.MainPresenter
-import com.github.iamwee.kotlinmvpstructure.view.main.presenter.MainRepository
+import com.github.iamwee.kotlinmvpstructure.view.main.presenter.*
 import kotlinx.android.synthetic.main.fragment_main.*
 
-class MainFragment : MvpFragment<IMainPresenter>(), IMainView {
+class MainFragment : MvpFragment<IMainPresenter>(), IMainView<MainViewModel> {
 
     companion object {
         fun newInstance(): MainFragment = MainFragment()
     }
 
-    private lateinit var mainAdapter: MainAdapter
+    private val mainAdapter = MainAdapter()
     override var layoutId: Int = R.layout.fragment_main
 
-    override fun onCreatePresenter(): IMainPresenter = MainPresenter(MainRepository(), this)
+    override fun onCreatePresenter(): IMainPresenter = MainPresenter(this)
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mainAdapter = MainAdapter().apply {
+        mainAdapter.apply {
             listener = { position -> showToast("Action from position $position") }
         }
+
+        swipeRefreshLayout.setOnRefreshListener { presenter.getRepositoryFromGithub() }
 
         with(recyclerView) {
             layoutManager = LinearLayoutManager(activity)
@@ -40,5 +39,14 @@ class MainFragment : MvpFragment<IMainPresenter>(), IMainView {
         }
     }
 
-    override fun onRepoSuccess(entities: List<RepositoryEntity>) = mainAdapter.map(entities)
+    override fun onViewModelChanged(viewModel: MainViewModel) {
+        with(viewModel) {
+            swipeRefreshLayout.isRefreshing = loading
+            mainAdapter.map(repositoryEntities)
+
+            error?.let {
+                showToast(viewModel.error!!)
+            }
+        }
+    }
 }

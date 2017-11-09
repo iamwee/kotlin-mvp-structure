@@ -19,9 +19,7 @@ class HttpProvider {
         val instance by lazy { HttpProvider() }
     }
 
-    val githubService: GithubService by lazy {
-        retrofit().create(GithubService::class.java)
-    }
+    val githubService: GithubService by lazy { retrofit().create(GithubService::class.java) }
 
     private fun retrofit(): Retrofit = Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_SERVICE)

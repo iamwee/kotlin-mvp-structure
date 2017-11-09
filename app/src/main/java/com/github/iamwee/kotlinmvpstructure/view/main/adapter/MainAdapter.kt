@@ -21,19 +21,18 @@ class MainAdapter : BaseAdapter() {
 
     lateinit var listener: (Int) -> Unit
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder = when (viewType) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
+            : BaseViewHolder = when (viewType) {
         TYPE_REPO -> ItemViewHolder(parent)
         else -> throw ViewTypeNotFoundException(viewType)
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         if (holder is ItemViewHolder) {
-            val item = items[position] as RepoItem
+            val item = items[position] as RepositoryItem
             with(holder.itemView) {
                 tvTitle.text = item.content
-                setOnClickListener {
-                    listener(position)
-                }
+                setOnClickListener { listener(position) }
             }
         }
     }
@@ -41,7 +40,7 @@ class MainAdapter : BaseAdapter() {
     fun map(response: List<RepositoryEntity>) {
         val baseItems = ArrayList<BaseItem>()
         for ((_, name, fullName, _, url) in response) {
-            baseItems.add(RepoItem("""
+            baseItems.add(RepositoryItem("""
                 |$name
                 |$fullName
                 |$url
