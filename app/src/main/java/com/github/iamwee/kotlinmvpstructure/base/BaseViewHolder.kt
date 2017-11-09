@@ -8,4 +8,5 @@ import android.view.ViewGroup
 /**
  * Created by zeon on 9/15/2017 AD.
  */
-abstract class BaseViewHolder(parent: ViewGroup?, layoutId: Int) : RecyclerView.ViewHolder(LayoutInflater.from(parent?.context).inflate(layoutId, parent, false))
+abstract class BaseViewHolder(parent: ViewGroup?, layoutId: Int)
+    : RecyclerView.ViewHolder(LayoutInflater.from(parent?.context).inflate(layoutId, parent, false))

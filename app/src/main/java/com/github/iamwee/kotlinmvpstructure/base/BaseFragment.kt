@@ -1,45 +1,8 @@
 package com.github.iamwee.kotlinmvpstructure.base
 
-import android.content.Intent
-import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import com.github.iamwee.kotlinmvpstructure.ServiceCallback
-import com.github.iamwee.kotlinmvpstructure.base.presenter.BasePresenter
-import com.github.iamwee.kotlinmvpstructure.base.presenter.IBasePresenter
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 /**
- * Created by zeon on 8/24/2017 AD.
+ * Created by zeon on 9/11/2017 AD.
  */
-
-abstract class BaseFragment<PRESENTER : IBasePresenter> : Fragment() {
-
-    lateinit var presenter: PRESENTER
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        presenter = onCreatePresenter()
-    }
-
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?)
-            : View? = inflater?.inflate(getLayoutId(), container, false)
-
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setupView()
-    }
-
-    override fun startActivity(intent: Intent?) {
-        super.startActivity(intent)
-        activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
-    }
-
-    protected abstract fun getLayoutId() : Int
-    protected abstract fun setupView()
-    protected abstract fun onCreatePresenter(): PRESENTER
-}
+open class BaseFragment: Fragment()
