@@ -5,7 +5,7 @@ import com.github.iamwee.kotlinmvpstructure.R
 import com.github.iamwee.kotlinmvpstructure.base.BaseAdapter
 import com.github.iamwee.kotlinmvpstructure.base.BaseItem
 import com.github.iamwee.kotlinmvpstructure.base.BaseViewHolder
-import com.github.iamwee.kotlinmvpstructure.common.ViewTypeNotFoundException
+import com.github.iamwee.kotlinmvpstructure.exception.ViewTypeNotFoundException
 import com.github.iamwee.kotlinmvpstructure.http.entity.RepositoryEntity
 import kotlinx.android.synthetic.main.item_main.view.*
 
