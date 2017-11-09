@@ -12,14 +12,13 @@ import retrofit2.Call
 
 class MainRepository : MvpRepository() {
 
+    private val service = HttpProvider.instance.githubService
+
     fun getRepositories(success: (List<RepositoryEntity>) -> Unit, failure: (String) -> Unit) {
-        repositoriesCall().enquene({ response ->
+        service.getRepositories().enquene({ response ->
             if (response.isSuccessful) {
                 success(response.body()!!)
             }
         }, { throwable -> failure(throwable.localizedMessage) })
     }
-
-    private fun repositoriesCall(): Call<List<RepositoryEntity>> = HttpProvider.instance.githubService.getRepositories()
-
 }
