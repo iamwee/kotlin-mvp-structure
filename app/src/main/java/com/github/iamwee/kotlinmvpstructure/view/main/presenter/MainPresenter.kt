@@ -5,9 +5,9 @@ import com.github.iamwee.kotlinmvpstructure.base.presenter.BasePresenter
 /**
  * Created by zeon on 8/24/2017 AD.
  */
-
-class MainPresenter(view: IMainView<MainViewModel>) :
-        BasePresenter<IMainView<MainViewModel>, MainViewModel>(view), IMainPresenter {
+typealias ViewContractor = IMainView<MainViewModel>
+class MainPresenter(view: ViewContractor)
+    : BasePresenter<ViewContractor, MainViewModel>(view), IMainPresenter {
 
     private val repository = MainRepository()
 
