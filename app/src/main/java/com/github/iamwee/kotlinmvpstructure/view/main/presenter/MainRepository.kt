@@ -1,29 +1,25 @@
 package com.github.iamwee.kotlinmvpstructure.view.main.presenter
 
-import com.github.iamwee.kotlinmvpstructure.ServiceCallback
-import com.github.iamwee.kotlinmvpstructure.base.presenter.BaseRepository
+import com.github.iamwee.kotlinmvpstructure.base.presenter.MvpRepository
+import com.github.iamwee.kotlinmvpstructure.extensions.enquene
 import com.github.iamwee.kotlinmvpstructure.http.HttpProvider
-import com.github.iamwee.kotlinmvpstructure.http.dao.RepoResponse
+import com.github.iamwee.kotlinmvpstructure.http.entity.RepositoryEntity
 import retrofit2.Call
 
 /**
  * Created by zeon on 8/24/2017 AD.
  */
 
-class MainRepository : BaseRepository() {
+class MainRepository : MvpRepository() {
 
-    fun getRepositories(callback: ServiceCallback<List<RepoResponse>>) {
-        call(repositoriesCall(), object : ServiceCallback<List<RepoResponse>> {
-            override fun onResponse(call: Call<List<RepoResponse>>, body: List<RepoResponse>) {
-                callback.onResponse(call, body)
+    fun getRepositories(success: (List<RepositoryEntity>) -> Unit, failure: (String) -> Unit) {
+        repositoriesCall().enquene({ response ->
+            if (response.isSuccessful) {
+                success(response.body()!!)
             }
-
-            override fun onFailure(call: Call<List<RepoResponse>>, t: Throwable) {
-                callback.onFailure(call, t)
-            }
-        })
+        }, { throwable -> failure(throwable.localizedMessage) })
     }
 
-    private fun repositoriesCall(): Call<List<RepoResponse>> = HttpProvider.instance.githubService().getRepositories()
+    private fun repositoriesCall(): Call<List<RepositoryEntity>> = HttpProvider.instance.githubService.getRepositories()
 
 }

@@ -1,6 +1,6 @@
 package com.github.iamwee.kotlinmvpstructure.http.service
 
-import com.github.iamwee.kotlinmvpstructure.http.dao.RepoResponse
+import com.github.iamwee.kotlinmvpstructure.http.entity.RepositoryEntity
 import retrofit2.Call
 import retrofit2.http.GET
 
@@ -11,5 +11,5 @@ import retrofit2.http.GET
 interface GithubService {
 
     @GET("/users/iamwee/repos")
-    fun getRepositories(): Call<List<RepoResponse>>
+    fun getRepositories(): Call<List<RepositoryEntity>>
 }

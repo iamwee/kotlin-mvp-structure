@@ -1,13 +1,13 @@
 package com.github.iamwee.kotlinmvpstructure.view.main.adapter
 
 import android.view.ViewGroup
-import android.widget.TextView
 import com.github.iamwee.kotlinmvpstructure.R
 import com.github.iamwee.kotlinmvpstructure.base.BaseAdapter
 import com.github.iamwee.kotlinmvpstructure.base.BaseItem
 import com.github.iamwee.kotlinmvpstructure.base.BaseViewHolder
 import com.github.iamwee.kotlinmvpstructure.common.ViewTypeNotFoundException
-import com.github.iamwee.kotlinmvpstructure.http.dao.RepoResponse
+import com.github.iamwee.kotlinmvpstructure.http.entity.RepositoryEntity
+import kotlinx.android.synthetic.main.item_main.view.*
 
 /**
  * Created by zeon on 8/24/2017 AD.
@@ -16,31 +16,31 @@ import com.github.iamwee.kotlinmvpstructure.http.dao.RepoResponse
 class MainAdapter : BaseAdapter() {
 
     companion object {
-        val TYPE_REPO = 1
+        const val TYPE_REPO = 1
     }
 
-    var listener: ((Int) -> Unit)? = null
+    lateinit var listener: (Int) -> Unit
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
-        when (viewType) {
-            TYPE_REPO -> return ItemViewHolder(parent)
-        }
-        throw ViewTypeNotFoundException(viewType)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder = when (viewType) {
+        TYPE_REPO -> ItemViewHolder(parent)
+        else -> throw ViewTypeNotFoundException(viewType)
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         if (holder is ItemViewHolder) {
             val item = items[position] as RepoItem
-            holder.tvTitle.text = item.content
-            holder.itemView.setOnClickListener {
-                listener?.invoke(position)
+            with(holder.itemView) {
+                tvTitle.text = item.content
+                setOnClickListener {
+                    listener(position)
+                }
             }
         }
     }
 
-    fun map(datas: List<RepoResponse>) {
+    fun map(response: List<RepositoryEntity>) {
         val baseItems = ArrayList<BaseItem>()
-        for ((_, name, fullName, _, url) in datas) {
+        for ((_, name, fullName, _, url) in response) {
             baseItems.add(RepoItem("""
                 |$name
                 |$fullName
@@ -48,10 +48,7 @@ class MainAdapter : BaseAdapter() {
                 """.trimMargin()))
         }
         items = baseItems
-        notifyDataSetChanged()
     }
 
-    private class ItemViewHolder(parent: ViewGroup) : BaseViewHolder(parent, R.layout.item_main) {
-        val tvTitle: TextView = itemView.findViewById(R.id.tvTitle)
-    }
+    private class ItemViewHolder(parent: ViewGroup) : BaseViewHolder(parent, R.layout.item_main)
 }

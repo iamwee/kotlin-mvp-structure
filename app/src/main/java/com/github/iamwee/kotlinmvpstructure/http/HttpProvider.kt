@@ -14,13 +14,14 @@ import java.util.concurrent.TimeUnit
 
 class HttpProvider {
 
-    private val TIMEOUT: Long = 10
-
     companion object {
+        private const val TIMEOUT = 10L
         val instance by lazy { HttpProvider() }
     }
 
-    fun githubService(): GithubService = retrofit().create(GithubService::class.java)
+    val githubService: GithubService by lazy {
+        retrofit().create(GithubService::class.java)
+    }
 
     private fun retrofit(): Retrofit = Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_SERVICE)
