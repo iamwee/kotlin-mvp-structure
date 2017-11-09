@@ -16,13 +16,13 @@ abstract class MvpFragment<PRESENTER : IBasePresenter> : BaseFragment() {
     lateinit var presenter: PRESENTER
     protected abstract var layoutId: Int
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        presenter = onCreatePresenter()
-    }
-
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?)
             : View? = inflater?.inflate(layoutId, container, false)
+
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        presenter = onCreatePresenter()
+    }
 
     override fun startActivity(intent: Intent?) {
         super.startActivity(intent)
