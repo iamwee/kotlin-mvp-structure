@@ -18,9 +18,7 @@ import kotlinx.android.synthetic.main.fragment_main.*
 class MainFragment : MvpFragment<IMainPresenter>(), IMainView {
 
     companion object {
-        fun newInstance(): MainFragment = MainFragment().apply {
-            arguments = Bundle()
-        }
+        fun newInstance(): MainFragment = MainFragment()
     }
 
     private lateinit var mainAdapter: MainAdapter
